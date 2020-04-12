@@ -113,8 +113,9 @@ def book(isbn):
 			
 @app.route("/api/book/<string:isbn>")
 def api_request(isbn):
-	count = db.execute("SELECT count(review) from reviews where isbn = :isbn",{"isbn":isbn})
-	if len(count)==0:
+	count = db.execute("SELECT count(review) from reviews where isbn = :isbn",{"isbn":isbn}).fetchall()
+	val=count[0][0]
+	if count is None:
 		return jsonify({"review":"no review found"})
 	else:
-		return jsonify({"reviews":count})			
+	 	return jsonify({"reviews":val})			
