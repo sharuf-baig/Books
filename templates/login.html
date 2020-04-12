@@ -1,0 +1,21 @@
+{% extends "default.html" %}
+{%block title%}
+	<title>login</title>
+ 	<link rel="stylesheet" href="../static/login.css">
+{%endblock%}
+	{%block nav%}
+		<a href="{{url_for('register')}}" class="m-2">Register</a>
+	{%endblock%}
+{%block body %}	
+	<main>
+		<div class="d-flex flex-row justify-content-center">
+				<form action="{{url_for('login')}}" method="post" class="d-flex flex-column justify-content-center" style="margin-top:10%;">
+					<h3 style="text-align: center;" >Login</h3>
+					<input type="text" name="name" placeholder="User Name" >
+					<input type="password" name="password" placeholder="password">
+					<button type="submit" class="btn btn-danger m-2">submit</button>		
+				
+				</form>
+		</div>
+	</main>
+{%endblock%}	

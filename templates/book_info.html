@@ -1,0 +1,51 @@
+{% extends "default.html" %}
+{%block title%}
+	<title>{{book.title}}</title>
+ 	<link rel="stylesheet" href="../static/book.css">
+{%endblock%}
+{%block nav%}
+	<h4>{{user[0]}}</h4>
+	<a href="{{url_for('logout')}}" class="m-2">Logout</a>
+{%endblock%}
+{%block body %}	
+	<div class="row justify-content-center">
+		<div class="col-md4"><img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" width="130px"></div>
+		<div class="col-md-4 bk-info">
+			<h2>{{book.title}}</h2>
+			<h3>Author {{book.author}}</h3>
+			<h3>Year Published-{{book.year}}</h3>
+			<h3>ISBN {{book.isbn}}</h3>
+		</div>	
+		<div class="col-md-4 gr-info">
+			<h2>goodReads</h2>
+			<h2>Avg Rating {{data.get("average_rating")}}</h2>
+			<h3>No of Ratings->{{data.get('reviews_count')}}</h3>
+			<h3>No of Reviews->{{data.get('text_reviews_count')}}</h3>
+
+		</div>
+	</div>
+<div class="row justify-content-center">
+	<div class="col-md-12">
+		<div class="alert alert-warning" style="text-align: center;">User Reviews</div>
+	</div>
+	<div class="col-md-6">
+		<div class="alert alert-light" style="text-align: center;">Make Your Own Review</div>
+		<form action="{{url_for('book',isbn=book.isbn)}}" method="post">
+			<textarea class="form-control" rows="5" name="review"></textarea>
+			<button class="btn btn-danger r-btn" type="submit">Submit</button>
+		</form>
+	</div>		
+</div>
+<div class="row justify-content-center">
+	{% for review in reviews %}
+	<div class="col-md-9 justify-content-center">
+		<div class="card m-2">
+			<div class="card-body justify-content-center">
+				<h4 class="card-title">{{review.name}}</h4>
+				<p class="card-text">{{review.review}}</p>
+			</div>
+		</div>
+	</div>	
+	{% endfor %}
+</div>
+{% endblock %}

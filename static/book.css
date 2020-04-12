@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Cedarville+Cursive|Oswald|Quicksand&display=swap');
+.row{
+	align-items: center;
+	margin-top: 5%;
+}
+.row .bk-info,.gr-info{
+	margin-left: 5%;
+	margin-top: 2.5%;
+	font-family: 'Quicksand',cursive;
+	padding: 2px 2px 2px 2px;
+}
+img{
+	margin-left: 5%;
+	margin-right: 5%;
+}
+.r-btn{
+	margin-left: 40%;
+	margin-top: 2.5%;
+}

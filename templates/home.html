@@ -1,0 +1,35 @@
+{% extends "default.html" %}
+{%block title%}
+	<title>Home</title>
+ 	<link rel="stylesheet" href="../static/home.css">
+{%endblock%}
+{%block nav%}
+	<h4>{{user[0]}}</h4>
+	<a href="{{url_for('logout')}}" class="m-2">Logout</a>
+{%endblock%}
+{%block body %}	
+	<div class="row justify-content-center">
+		<div class="col-md-4 justify-content-center">
+			<h1 style="text-align: center;">Books</h1>
+			<form class="d-flex flex-row justify-content-center" action="{{url_for('home')}}" method="post">
+				<input type="text" name="book" placeholder="name of the book" class="m-1 p-2" style="height: 5%">
+				<button type="submit" class="btn btn-danger p-2 m-1" style="height: 5%">search</button>
+			</form>	
+		</div>	
+	</div>
+	<div class="row justify-content-start m-2 section1">		
+		{% for book in books %}
+			<div class="col-md-4 p-2">
+			<div class="card">
+					<img src="http://covers.openlibrary.org/b/isbn/{{book.isbn}}-M.jpg" class="card-img-top" alt="book" style="height: 50vh;width:50%;align-items: center; ">
+					<div class="card-body">
+						<h4 class="card-title">{{book.title}}</h4>
+						<p class="card-text">{{book.author}}</p>
+						<a href="{{url_for('book',isbn=book.isbn)}}">More Info</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{%endblock%}	
+
