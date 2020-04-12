@@ -1,4 +1,4 @@
-from flask import Flask, session,request,render_template,redirect,flash,url_for
+from flask import Flask, session,request,render_template,redirect,flash,url_for,jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -110,3 +110,11 @@ def book(isbn):
 			return redirect(url_for('book',isbn=isbn))
 		else:
 			return render_template("error.html",error="no review submitted")						
+			
+@app.route("/api/book/<string:isbn>")
+def api_request(isbn):
+	count = db.execute("SELECT count(review) from reviews where isbn = :isbn",{"isbn":isbn})
+	if len(count)==0:
+		return jsonify({"review":"no review found"})
+	else:
+		return jsonify({"reviews":count})			
